@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
@@ -8,10 +18,9 @@ export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
   @Get()
-  findAll(
+  findAll() {
     // @Res() response, will give you express instance
     // @Query() paginationQuery,
-  ) {
     // not recommended, use nest approch instead
     // response.status(200).send('This action returns all coffees')
 
@@ -21,8 +30,9 @@ export class CoffeesController {
   }
 
   @Get(':id')
-  findOne(@Param() allParams, @Param('id') spesificId: string) {
-    return this.coffeesService.findOne(spesificId);
+  findOne(@Param() params, @Param('id') id: number) {
+    console.log(typeof id);
+    return this.coffeesService.findOne(id + '');
   }
 
   @Post()
